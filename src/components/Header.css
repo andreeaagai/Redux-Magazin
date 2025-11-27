@@ -1,0 +1,33 @@
+.header {
+  width: 100%;
+  padding: 20px 0px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.header h1 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #222;
+  margin-left: 20px;
+  
+}
+
+.cart-btn {
+  padding: 10px 18px;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.cart-btn:hover {
+  background-color: #27ae60;
+}

@@ -1,43 +1,53 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../actions/Actions'; 
-import { Link } from 'react-router-dom'; 
+import ProductCard from './ProductCard';
+import { products } from '../data/products';
+import Header from './Header';
 import './MagazinComponent.css'; 
 
+const categories = [
+  "Toate Produsele",
+  "Lactate",
+  "Ouă",
+  "Fructe",
+  "Legume",
+  "Pâine",
+  "Pasta & Orez",
+  "Carne",
+  "Pește",
+  "Cafea & Ceai",
+];
+
 const MagazinComponent = () => {
-  const dispatch = useDispatch();
-  const [productName, setProductName] = useState('');
+  const [activeCategory, setActiveCategory] = useState("Toate Produsele");
 
-  const handleAddToCart = () => {
-    const newProduct = {
-      id: Date.now(), // Folosim un id unic pentru fiecare produs
-      name: productName,
-      price: Math.floor(Math.random() * 100), 
-    };
-    dispatch(addToCart(newProduct)); // Trimitem acțiunea de adăugare în coș
-    setProductName(''); // Resetăm câmpul de input după adăugarea produsului
-  };
+  const filteredProducts =
+    activeCategory === "Toate Produsele"
+      ? products
+      : products.filter((p) => p.category === activeCategory);
 
-  return (
-    <div className="magazin-container">
-    <Link to="/cart" className="cart-link">
-        <button className="cart-btn">Coșul Meu</button>
-    </Link>
-      <h1>Magazin Online</h1>
-      <div className="add-product-container">
-        <input
-          type="text"
-          placeholder="Nume produs"
-          value={productName}
-          onChange={(e) => setProductName(e.target.value)}
-          className="product-input"
-        />
-        <button onClick={handleAddToCart} className="add-to-cart-btn">
-          Adaugă în coș
-        </button>
-      </div>
-    </div>
-  );
+
+
+      return (
+        <>
+          <Header />
+          <div className="categories">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                className={`category-btn ${activeCategory === cat ? "active" : ""}`}
+                onClick={() => setActiveCategory(cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+          <div className="products-grid">
+            {filteredProducts.map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </>
+      );
 };
 
 export default MagazinComponent;
