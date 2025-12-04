@@ -44,7 +44,7 @@ function CartComponent() {
               </li>
             ))}
           </ul>
-          <h3 className="total-container">Total: {total} RON</h3>
+          <h3 className="total-container">Total: {formatter.format(total)}</h3>
         </>
       )}
       <Link to="/">

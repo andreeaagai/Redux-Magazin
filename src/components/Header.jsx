@@ -15,7 +15,7 @@ const Header = () => {
   }
   return (
     <header className="header">
-      <h1>Magazin Alimentar</h1>
+      <h1>Magazin Online</h1>
       <Link to="/cart">
         <button className="cart-btn">
           Coș ({totalItems})
