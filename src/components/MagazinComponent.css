@@ -78,3 +78,29 @@ body.dark-mode .category-btn:hover {
 body.dark-mode .products-grid {
   color: #fff;
 }
+
+@media (max-width: 768px) {
+  .category-btn {
+    padding: 8px 18px;
+    font-size: 14px;
+    border-radius: 20px;
+  }
+
+  .categories {
+    gap: 8px;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-btn {
+    padding: 6px 14px;
+    font-size: 12px;
+    border-radius: 16px;
+  }
+
+  .categories {
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+}

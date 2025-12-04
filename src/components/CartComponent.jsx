@@ -1,4 +1,5 @@
 import React from "react";
+import BackToTopButton from "./BackToTopButton";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart } from "../actions/Actions";
 import { Link } from "react-router-dom";
@@ -13,6 +14,12 @@ function CartComponent() {
   };
 
  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+ const formatter = new Intl.NumberFormat("ro-RO", {
+  style: "currency",
+  currency: "RON",
+  minimumFractionDigits: 2,
+ });
 
   return (
     <div className="cart-container">
@@ -32,7 +39,7 @@ function CartComponent() {
             {cart.map(item => (
               <li key={item.id} className="cart-item">
                 <span>{item.name} x {item.quantity}</span>
-                <span>{item.price * item.quantity} RON</span>
+                <span>{formatter.format(item.price * item.quantity)}</span>
                 <button onClick={() => handleRemove(item.id)} className="remove-btn">Elimină</button>
               </li>
             ))}
@@ -43,6 +50,7 @@ function CartComponent() {
       <Link to="/">
         <button className="back-home">Înapoi la magazin</button>
       </Link>
+      <BackToTopButton />
     </div>
   );
 }

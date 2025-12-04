@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ProductCard from './ProductCard';
 import { products } from '../data/products';
 import Header from './Header';
+import BackToTopButton from './BackToTopButton';
 import './MagazinComponent.css'; 
 
 const categories = [
@@ -25,8 +26,6 @@ const MagazinComponent = () => {
       ? products
       : products.filter((p) => p.category === activeCategory);
 
-
-
       return (
         <>
           <Header />
@@ -46,6 +45,7 @@ const MagazinComponent = () => {
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
+          <BackToTopButton />
         </>
       );
 };
