@@ -33,15 +33,15 @@ function CartComponent() {
               <li key={item.id} className="cart-item">
                 <span>{item.name} x {item.quantity}</span>
                 <span>{item.price * item.quantity} RON</span>
-                <button onClick={() => handleRemove(item.id)}>Elimină</button>
+                <button onClick={() => handleRemove(item.id)} className="remove-btn">Elimină</button>
               </li>
             ))}
           </ul>
-          <h3>Total: {total} RON</h3>
+          <h3 className="total-container">Total: {total} RON</h3>
         </>
       )}
       <Link to="/">
-        <button>Înapoi la magazin</button>
+        <button className="back-home">Înapoi la magazin</button>
       </Link>
     </div>
   );

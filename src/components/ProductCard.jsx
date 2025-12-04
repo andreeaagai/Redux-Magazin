@@ -1,6 +1,7 @@
 import React from "react";
 import {useDispatch} from "react-redux";
 import { addToCart } from "../actions/Actions";
+import './ProductCard.css';
 
 const ProductCard = ({product}) => {
     const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const ProductCard = ({product}) => {
         <div className="product-card">
             <img src={product.url} alt={product.name} className="product-img" />
             <h3 className="product-name">{product.name}</h3>
-            <p className="product.price">{product.price} RON</p>
+            <p className="product-price">{product.price} RON</p>
             <button onClick={handleAddToCard} className="add-btn">
                 Adaugă în coș
             </button>
