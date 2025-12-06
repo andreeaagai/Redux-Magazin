@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BackToTopButton from "./BackToTopButton";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart } from "../actions/Actions";
+import { fetchCart, removeFromCart } from "../actions/Actions";
 import { Link } from "react-router-dom";
 import "./CartComponent.css";
 
@@ -9,8 +9,12 @@ function CartComponent() {
   const cart = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
 
-  const handleRemove = (id) => {
-    dispatch(removeFromCart(id));
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, [dispatch]);
+
+  const handleRemove = (_id) => {
+    dispatch(removeFromCart(_id));
   };
 
  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -36,13 +40,16 @@ function CartComponent() {
       ) : (
         <>
           <ul className="cart-list">
-            {cart.map(item => (
-              <li key={item.id} className="cart-item">
-                <span>{item.name} x {item.quantity}</span>
-                <span>{formatter.format(item.price * item.quantity)}</span>
-                <button onClick={() => handleRemove(item.id)} className="remove-btn">Elimină</button>
-              </li>
-            ))}
+          {cart.map(item => (
+            <li key={item._id} className="cart-item">
+              <span>{item.name} x {item.quantity}</span>
+              <span>{formatter.format(item.price * item.quantity)}</span>
+              <button onClick={() => handleRemove(item._id)} className="remove-btn">
+                Elimină
+              </button>
+            </li>
+          ))}
+
           </ul>
           <h3 className="total-container">Total: {formatter.format(total)}</h3>
         </>

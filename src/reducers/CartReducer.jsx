@@ -1,5 +1,3 @@
-// Reducerul va manipula starea globală pe baza acțiunilor primite.
-
 const initialState = {
   cart: [],
 };
@@ -7,29 +5,32 @@ const initialState = {
 function cartReducer(state = initialState, action) {
   switch (action.type) {
     case "ADD_TO_CART":
-      const productInCart = state.cart.find(
-        (item) => item.id === action.payload.id
-      );
-      if (productInCart) {
+      const existing = state.cart.find(item => item._id === action.payload._id);
+
+      if (existing) {
         return {
           ...state,
-          cart: state.cart.map((item) =>
-            item.id === action.payload.id
-              ? { ...item, quantity: item.quantity + 1 } // Dacă produsul există, crește cantitatea
-              : item
+          cart: state.cart.map(item =>
+            item._id === action.payload._id ? { ...action.payload } : item
           ),
         };
       } else {
         return {
           ...state,
-          cart: [...state.cart, { ...action.payload, quantity: 1 }], // Dacă nu există, adăugăm produsul
+          cart: [...state.cart, action.payload],
         };
       }
 
     case "REMOVE_FROM_CART":
       return {
         ...state,
-        cart: state.cart.filter((item) => item.id !== action.payload), // Eliminăm produsul din coș
+        cart: state.cart.filter((item) => item._id !== action.payload),
+      };
+
+    case "SET_CART":
+      return {
+        ...state,
+        cart: action.payload,
       };
 
     default:
